@@ -55,7 +55,9 @@ def handle_missing_values(df, req_column = .7, req_row = .6):
 
     df=df.drop(columns=['calculatedbathnbr','finishedsquarefeet12',
                    'fullbathcnt','propertylandusetypeid',
-                    'propertylandusedesc','assessmentyear'])
+                    'propertylandusedesc','assessmentyear',
+                    'transactiondate',
+                    'censustractandblock','regionidcounty'])
     return df
 
 def extra_clean(df):
@@ -67,8 +69,6 @@ def extra_clean(df):
     df.drop(df.structuretaxvaluedollarcnt.nlargest(1).index.tolist(), 
     inplace=True)
     df.drop(df.landtaxvaluedollarcnt.nlargest(4).index.tolist(), 
-    inplace=True)
-    df.drop(df.censustractandblock.nlargest(1).index.tolist(), 
     inplace=True)
     df.drop(df.regionidzip.nlargest(12).index.tolist(), 
     inplace=True)
@@ -85,8 +85,7 @@ def extra_clean(df):
     df.yearbuilt.fillna(df.yearbuilt.median(), inplace=True)
     df.structuretaxvaluedollarcnt.fillna(
         df.structuretaxvaluedollarcnt.median(), inplace=True)
-    df.censustractandblock.fillna(
-        df.censustractandblock.median(), inplace=True)
+    df.roomcnt.replace(0,df.roomcnt.median(), inplace=True)
     df.set_index('parcelid', inplace=True)
     df.dropna(inplace=True)
     return df
