@@ -35,7 +35,7 @@ def build_model(train, feature_clustered, k):
     # Initialize the Linear Regression Object 
     lm = LinearRegression()
 
-    rfe = RFE(lm, 9)
+    rfe = RFE(lm, 12)
 
     # Transforming data using RFE
     X_rfe = rfe.fit_transform(train[X],train[Y])  
