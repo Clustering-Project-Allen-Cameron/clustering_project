@@ -18,5 +18,5 @@ def acquire_data():
     if os.path.exists('zillow.csv'):
         df = pd.read_csv('zillow.csv',  index_col=0)
     else:
-        df = zillow_data
+        df = zillow_data()
     return df
